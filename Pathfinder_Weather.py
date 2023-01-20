@@ -9,7 +9,7 @@ def stormbound_hazards(strmHazRoll, strmHazMod, pilotRoll):
         strmHaz = "Serious Hull Breach: The vessel's hull is punctured and it immediately begins to sink."
 
     elif strmHazRoll > 94:
-        strmHaz = "Two Hazards: \n1)" + stormbound_hazards( sum( dice.roll("1d100") ), strmHazMod, pilotRoll) + "\n\n2)" + stormbound_hazards( sum( dice.roll("1d100") ), strmHazMod, pilotRoll)
+        strmHaz = "Two Hazards: \n1)" + stormbound_hazards( sum( dice.roll("1d100") ) + strmHazMod - pilotRoll, strmHazMod, pilotRoll) + "\n\n2)" + stormbound_hazards( sum( dice.roll("1d100")  + strmHazMod - pilotRoll ), strmHazMod, pilotRoll)
     
     elif strmHazRoll > 92:
         strmHaz = "Pooped: A massive wave engulfs the vessel unexpectedly from the stern. \
@@ -224,7 +224,6 @@ print("Features: \n" + wthrFeat)
 # Stormbound Hazard system
 while(strmHazMod != "No Hazard"):
     pilotRoll = int( input("$Input Pilot Roll:") )
-    #strmHazRoll = sum( dice.roll("1d100") ) + strmHazMod - pilotRoll
-    strmHazRoll = 95
+    strmHazRoll = sum( dice.roll("1d100") ) + strmHazMod - pilotRoll
     strmHaz = stormbound_hazards(strmHazRoll, strmHazMod, pilotRoll)
     print( "Stormbound Hazard: \n\n"+strmHaz )
